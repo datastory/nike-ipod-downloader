@@ -41,4 +41,4 @@ def actual(file):
 files = [f for f in listdir(ipodPath) if isfile(join(ipodPath,f))]
 for file in files:
 	actual(str(ipodPath + file))
-	os.remove(str(ipodPath + file))
+	#os.remove(str(ipodPath + file)) #this removes old workout files from iPod
