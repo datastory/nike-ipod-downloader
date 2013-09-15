@@ -4,8 +4,9 @@ import csv
 import os
 from os import listdir
 from os.path import isfile, join
+from sys import exit
 
-outputFile = 'NikeOutput.csv' #edit as you wish
+outputFile = '/Users/jancibulka/Documents/NikeOutput.csv' #edit as you wish
 #Edit name of yout iPod, instead of 'CibaPod'. Edit 'pedometer' for selecting another sensor. On Windows you have to change the whole path according to win file system.
 ipodPath = '/Volumes/CibaPod/iPod_Control/Device/Trainer/Workouts/Empeds/pedometer/latest/' 
 
@@ -37,8 +38,18 @@ def actual(file):
 		else:
 			writeNew(file)
 
+if (os.path.exists(ipodPath) == True): 
+	pass
+else:
+	exit(0)
+
+try:
+   with open(outputFile): pass
+except IOError:
+   fil = open(outputFile, 'w+')
+   fil.close()
 
 files = [f for f in listdir(ipodPath) if isfile(join(ipodPath,f))]
 for file in files:
 	actual(str(ipodPath + file))
-	#os.remove(str(ipodPath + file)) #this removes old workout files from iPod
+	os.remove(str(ipodPath + file)) #this removes old workout files from iPod
